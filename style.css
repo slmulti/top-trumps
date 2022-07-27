@@ -1,0 +1,81 @@
+/* Color Theme Swatches in Hex */
+.Muted-Goodness-1-hex { color: #0C0F08; }
+.Muted-Goodness-2-hex { color: #5E6C52; }
+.Muted-Goodness-3-hex { color: #322A15; }
+.Muted-Goodness-4-hex { color: #A4895E; }
+.Muted-Goodness-5-hex { color: #E6CBC2; }
+
+
+
+*{
+    
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body{
+    background-color: #5E6C52;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-style: groove;
+    padding-bottom: 10rem;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+h1{
+    text-align: center;
+    text-decoration: underline;
+}
+
+.player1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #E6CBC2;
+    padding: 1rem;
+    border: 1px solid #322A15;
+    border-radius: .25rem; 
+    width: 40%;
+    height: 800px;
+}
+
+.player2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #E6CBC2;
+    padding: 1rem;
+    border: 1px solid #322A15;
+    border-radius: .25rem;
+    width: 40%;
+    height: 800px;
+}
+
+.stats{
+    color: #322A15;
+    font-size: 1.2rem;    
+}   
+
+td, th {
+    border: 1px solid #999;
+    margin: .5rem;       
+  }
+
+
+  
+img{
+    height: 300px; 
+    margin-bottom: 1rem;  
+}
+
+.playing-area{
+    display: flex;
+    flex-direction: row;
+    gap: 3rem
+    
+}
+
