@@ -31,31 +31,46 @@ const cards = [
     {id: 30, name: "Davinson Sánchez", appearences: 23, goals: 2, wins: 14, loses: 5, assists: 0, tackles: 41, fouls: 16, saves: 0, img: 'Davinson Sánchez.png'}
 ]
 
-const goals = document.getElementById("goals");
+// const goals = document.getElementById("goals");
 
-console.log(goals)
+// console.log(goals)
+
 
 //Players cards, socres and current updated cards
-let player1Cards = [];
-let player2Cards = [];
+// let player1Cards = [];
+// let player2Cards = [];
 
-let player1Current = []
-let player2Current = []
+// let player1Current = []
+// let player2Current = []
 
-let player1Score = [];
-let player2Score = [];
+//let player1ImageDisplay = document.getElementById(player1Image) // not put tag in html, currently using default pic
+//let player2ImageDisplay = document.getElementById(player2Image) // not put tag in html, currently using default pic
 
+// let player1Score = 0;
+// let player2Score = 0;
 
+// let player1ScoreDisplay = document.getElementById("player1-score")
+// let player2ScoreDisplay = document.getElementById("player2-score")
+
+//=====================================================================================================
 //work out how to randomly shuffle the footballer cards
+//=====================================================================================================
 
 
+
+//=====================================================================================================
 //work out how to compare the stats against the computers stats
+//=====================================================================================================
 
 
+//=====================================================================================================
 //work out where and how to display message depending on who won and then update score and move on to next round
+//=====================================================================================================
 
 
+//=====================================================================================================
 //determin if the game has ended or if it continues
+//=====================================================================================================
 
 // function playGame() {
 //     if player1Cards.length < 30 && player2Cards.length < 30){
@@ -67,102 +82,116 @@ let player2Score = [];
 //     }
 // }
 
+
+//=====================================================================================================
+//add event listeners on click for each button to intiate compare stats
+//=====================================================================================================
+
+// appearences-btn.addEventListener("click", () => {
+//     alert("haha you thought that would work?")
+// })
+
+//=====================================================================================================
+//call fucntions to start game
+//=====================================================================================================
+
+
 //=====================================================================================================
 //getting the stats to display on page
 
-// function getStats(cards){
+function getStats(cards){
 
-//     function getName(cards){
-//         let nameElement = document.getElementById("name")
+    function getName(cards){
+        let nameElement = document.getElementById("name")
 
-//         let name = cards[0].name
+        let name = cards[0].name
 
-//         nameElement.innerText = name    // nameElement.innerText = `Name: + ${name}`
+        nameElement.innerText = name    // nameElement.innerText = `Name: + ${name}`
         
-//     }
-//     getName(cards)
+    }
+    getName(cards)
 
-//         function getAppearences(cards){
-//             let appearencesElement = document.getElementById("appearences")
+        function getAppearences(cards){
+            let appearencesElement = document.getElementById("appearences")
 
-//             let appearences = cards[0].appearences
+            let appearences = cards[0].appearences
 
-//             appearencesElement.innerText = appearences    // nameElement.innerText = `Name: + ${name}`
+            appearencesElement.innerText = appearences    // nameElement.innerText = `Name: + ${name}`
             
-//         }
-//         getAppearences(cards)   
+        }
+        getAppearences(cards)   
 
-//             function getGoals(cards){
-//                 let goalsElement = document.getElementById("goals")
+            function getGoals(cards){
+                let goalsElement = document.getElementById("goals")
 
-//                 let goals = cards[0].goals
+                let goals = cards[0].goals
 
-//                 goalsElement.innerText = goals    // nameElement.innerText = `Name: + ${name}`
+                goalsElement.innerText = goals    // nameElement.innerText = `Name: + ${name}`
                 
-//             }
-//             getGoals(cards)   
+            }
+            getGoals(cards)   
 
-//                 function getWins(cards){
-//                     let winsElement = document.getElementById("wins")
+                function getWins(cards){
+                    let winsElement = document.getElementById("wins")
 
-//                     let wins = cards[0].wins
+                    let wins = cards[0].wins
 
-//                     winsElement.innerText = wins    // nameElement.innerText = `Name: + ${name}`
+                    winsElement.innerText = wins    // nameElement.innerText = `Name: + ${name}`
                     
-//                 }
-//                 getWins(cards) 
+                }
+                getWins(cards) 
 
-//                     function getLoses(cards){
-//                         let losesElement = document.getElementById("loses")
+                    function getLoses(cards){
+                        let losesElement = document.getElementById("loses")
 
-//                         let loses = cards[0].loses
+                        let loses = cards[0].loses
 
-//                         losesElement.innerText = loses    // nameElement.innerText = `Name: + ${name}`
+                        losesElement.innerText = loses    // nameElement.innerText = `Name: + ${name}`
                         
-//                     }
-//                     getLoses(cards) 
+                    }
+                    getLoses(cards) 
 
-//                         function getAssists(cards){
-//                             let assistsElement = document.getElementById("assists")
+                        function getAssists(cards){
+                            let assistsElement = document.getElementById("assists")
 
-//                             let assists = cards[0].assists
+                            let assists = cards[0].assists
 
-//                             assistsElement.innerText = assists    // nameElement.innerText = `Name: + ${name}`
+                            assistsElement.innerText = assists    // nameElement.innerText = `Name: + ${name}`
                             
-//                         }
-//                         getAssists(cards)
+                        }
+                        getAssists(cards)
 
-//                             function getTackles(cards){
-//                                 let tacklesElement = document.getElementById("tackles")
+                            function getTackles(cards){
+                                let tacklesElement = document.getElementById("tackles")
 
-//                                 let tackles = cards[0].tackles
+                                let tackles = cards[0].tackles
 
-//                                 tacklesElement.innerText = tackles    // nameElement.innerText = `Name: + ${name}`
+                                tacklesElement.innerText = tackles    // nameElement.innerText = `Name: + ${name}`
                                 
-//                             }
-//                             getTackles(cards)
+                            }
+                            getTackles(cards)
 
-//                                 function getFouls(cards){
-//                                     let foulsElement = document.getElementById("fouls")
+                                function getFouls(cards){
+                                    let foulsElement = document.getElementById("fouls")
 
-//                                     let fouls = cards[0].fouls
+                                    let fouls = cards[0].fouls
 
-//                                     foulsElement.innerText = fouls    // nameElement.innerText = `Name: + ${name}`
+                                    foulsElement.innerText = fouls    // nameElement.innerText = `Name: + ${name}`
                                     
-//                                 }
-//                                 getFouls(cards)
+                                }
+                                getFouls(cards)
 
-//                                     function getSaves(cards){
-//                                         let savesElement = document.getElementById("saves")
+                                    function getSaves(cards){
+                                        let savesElement = document.getElementById("saves")
 
-//                                         let saves = cards[0].saves
+                                        let saves = cards[0].saves
 
-//                                         savesElement.innerText = saves    // nameElement.innerText = `Name: + ${name}`
+                                        savesElement.innerText = saves    // nameElement.innerText = `Name: + ${name}`
                                         
-//                                     }
-//                                     getSaves(cards)
-// }
-// getStats(cards)
+                                    }
+                                    getSaves(cards)
+}
+getStats(cards)
 
 
 

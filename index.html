@@ -16,12 +16,20 @@
   <h1>Welcome to Footballers Top Trumps</h1>
   
   <div class="intro">
-    <p>In this game you will be dealt 15 cards with stats from Premier League Footballers from the "so-called" Top 6 teams.</p>
+    <p>In this game you will be dealt 15 cards with stats from Premier League Footballers from the "so-called" BIG 6 Teams.</p>
     <p>All stats will be from the 2021/22 Season.</p>
     <p>In this game you will have to pick which stat your current player has that you think will be greater than the computer.</p>
     <p>First to collect all 30 cards wins.</p>
     <p>Good Luck!</p>
+    <button onclick="myFunction()">Click Me</button>
   </div>
+
+  <script>
+    function myFunction() {
+      alert("haha you thought any of this would work?");
+    }
+    </script>
+
 
 <div class="playing-area">
   <div class = "player1">
@@ -30,32 +38,32 @@
     <img src="./imgs/football-player-silhouette.png" alt="unknown footballer"/>
     <table class = "stats">
       <tr>
-        <td><h4>Appearences:</h4></td>
+        <td><button id="appearences-btn">Appearences:</button></td>
         <td id="appearences">?????</td>
-        <td><h4>Goals:</h4></td>
+        <td><button id="goals-btn">Goals:</button></td>
         <td id="goals">?????</td>
       </tr>
       <tr>
-        <td><h4>Wins:</h4></td>
+        <td><button id="wins-btn">Wins:</button></td>
         <td id="wins">?????</td>
-        <td><h4>Loses:</h4></td>
+        <td><button id="loses-btn">Loses:</button></td>
         <td id="loses">?????</td>
       </tr>
       <tr>
-        <td><h4>Assists:</h4></td>
+        <td><button id="assists-btn">Assists:</button></td>
         <td id="assists">?????</td>
-        <td><h4>Tackles:</h4></td>
+        <td><button id="tackles-btn">Tackles:</button></td>
         <td id="tackles">?????</td>
       </tr>
       <tr>
-        <td><h4>Fouls:</h4></td>
+        <td><button id="fouls-btn">Fouls:</button></td>
         <td id="fouls">?????</td>
-        <td><h4>Saves:</h4></td>
+        <td><button id="saves-btn">Saves:</button></td>
         <td id="saves">?????</td>
       </tr>
     </table>   
         <!-- <img src="" alt=""> -->
-      <h3 id="score"> You have X Cards</h3>
+      <h3 id="player1-score"> You have X Cards</h3>
   </div>
 
   <div class = "player2">
@@ -89,6 +97,6 @@
       </tr>
     </table>   
         <!-- <img src="" alt=""> -->
-    <h3 id="score"> The Computer has X Cards</h3>
+    <h3 id="player2-score"> The Computer has X Cards</h3>
   </div>
 </div>
