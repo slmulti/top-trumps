@@ -31,61 +31,139 @@ const cards = [
     {id: 30, name: "Davinson Sánchez", appearences: 23, goals: 2, wins: 14, loses: 5, assists: 0, tackles: 41, fouls: 16, saves: 0, img: 'Davinson Sánchez.png'}
 ]
 
-// const goals = document.getElementById("goals");
+const goals = document.getElementById("goals");
 
-// console.log(goals)
+console.log(goals)
 
 
 //Players cards, socres and current updated cards
-// let player1Cards = [];
-// let player2Cards = [];
+let player1Cards = [];
+let player2Cards = [];
 
-// let player1Current = []
-// let player2Current = []
+let player1Current = []
+let player2Current = []
 
-//let player1ImageDisplay = document.getElementById(player1Image) // not put tag in html, currently using default pic
-//let player2ImageDisplay = document.getElementById(player2Image) // not put tag in html, currently using default pic
+let player1ImageDisplay = document.getElementById(player1Image) // not put tag in html, currently using default pic
+let player2ImageDisplay = document.getElementById(player2Image) // not put tag in html, currently using default pic
 
-// let player1Score = 0;
-// let player2Score = 0;
+let player1Score = 0;
+let player2Score = 0;
 
-// let player1ScoreDisplay = document.getElementById("player1-score")
-// let player2ScoreDisplay = document.getElementById("player2-score")
+let player1ScoreDisplay = document.getElementById("player1-score")
+let player2ScoreDisplay = document.getElementById("player2-score")
+
+let messageDisplay = document.getElementById("message-display")
 
 //=====================================================================================================
 //work out how to randomly shuffle the footballer cards
 //=====================================================================================================
 
+function shuffleCards(){
+    let hand = cards.length;
+    let player1Hand = 0;
+    let player2Hand = 0;
 
+    while(--hand > 0) {
+        let cardIndex = Math.floor(Math.random() * (hand + 1)); //important to add 1 to make sure all the 30 cards are used
+        let randomCards = cards.splice(cardIndex, 1);
+
+        if(player1Hand>player2Hand){
+            player2Cards.push(randomCards[0]);
+            player2Hand +=1;
+        } else if(player1Hand == player2Hand){
+            player1Cards.push(randomCards[0]);
+            player1Hand +=1;
+        }
+    }
+}
+
+//=====================================================================================================
+//work out how to randomly select a card from each players hand
+//=====================================================================================================
+
+function drawnCard(){
+    let player1 = Math.floor((math.random()*player1Cards.length));
+    let player2 = Math.floor((Math.random()*player2Cards.length));
+
+    player1Current.push(player1Cards.splice(player1, 1)[0]); //Takes ONE card from the hand just created
+    player2Current.push(player2Cards.splice(player2, 1)[0]);
+
+    //if have time pull the image for each footballer
+
+
+}
 
 //=====================================================================================================
 //work out how to compare the stats against the computers stats
 //=====================================================================================================
 
+function compare(stat){
+    let player1Stat = player1Current[0][stat];
+    let player2Stat = player2Current[0][stat];
+
+    if( stat=="appearences" || stat=="goals" || stat=="wins" || stat=="loses" || stat=="assists" || stat=="tackles" || stat=="fouls" || stat=="saves"){
+        if(player1Stat>player2Stat){
+            updateResult("player1-win");
+        }else if(player2Stat>player1Stat){
+            updateResult("player2-win");
+        } else{
+            updateResult("draw")
+        } 
+    }
+}
 
 //=====================================================================================================
 //work out where and how to display message depending on who won and then update score and move on to next round
 //=====================================================================================================
 
+function updateResult(result){
+    if(result=="player1-win"){
+        player1Score +=1
+        player1ScoreDisplay.textContent = `Your score: ${player1Score}`;
+        player1Cards.push(player2Current.splice(0,1)[0]); //take player2 card and put it to the back of deck, do the same with player1 winning card
+        player1Cards.push(player1Current.splice(0,1)[0]);
+        messageDisplay.textContent = `Player 1 wins the round!`;
+        setTimeout( () => {messageDisplay.style.display = "none"}, 2000) //message from above goes after 2 seconds
+        playGame();
+    }else if(result=="player2-win"){
+        player2Score +=1
+        player2ScoreDisplay.textContent = `Computer score: ${player2Score}`;
+        player2Cards.push(player1Current.splice(0,1)[0])  
+        player2Cards.push(player2Current.splice(0,1)[0])
+        messageDisplay.textContent = `The Computer wins the round!`;
+        setTimeout( () => {messageDisplay.style.display = "none"}, 2000) //message from above goes after 2 seconds
+        playGame();  
+    }else{
+        messageDisplay.textContent = `Draw!`;
+        player1Cards.push(player1Current.splice(0,1)[0]);
+        player2Cards.push(player2Current.splice(0,1)[0])
+        playGame()
+    }
+}
 
 //=====================================================================================================
 //determin if the game has ended or if it continues
 //=====================================================================================================
 
-// function playGame() {
-//     if player1Cards.length < 30 && player2Cards.length < 30){
-//         //play game
-//     } else if (player1Cards == 30){
-//         //win message
-//     } else if (player2Cards == 30){
-//         //lose message
-//     }
-// }
+function playGame() {
+    if (player1Cards.length < 30 && player2Cards.length < 30){
+        //play game
+        drawnCard()
+    } else if (player1Cards.length == 30){
+        //loose message
+        messageDisplay.textContent = "You Suck, you were beaten by a computer!!!"
+    } else if (player2Cards.length == 30){
+        //win message
+        messageDisplay.textContent = "The game has finished! Player 1 is the Victor!!!"
+    }
+}
 
 
 //=====================================================================================================
 //add event listeners on click for each button to intiate compare stats
 //=====================================================================================================
+
+//do i need a rest button or just refresh page?
 
 // appearences-btn.addEventListener("click", () => {
 //     alert("haha you thought that would work?")
@@ -99,99 +177,99 @@ const cards = [
 //=====================================================================================================
 //getting the stats to display on page
 
-function getStats(cards){
+// function getStats(cards){
 
-    function getName(cards){
-        let nameElement = document.getElementById("name")
+//     function getName(cards){
+//         let nameElement = document.getElementById("name")
 
-        let name = cards[0].name
+//         let name = cards[0].name
 
-        nameElement.innerText = name    // nameElement.innerText = `Name: + ${name}`
+//         nameElement.innerText = name    // nameElement.innerText = `Name: + ${name}`
         
-    }
-    getName(cards)
+//     }
+//     getName(cards)
 
-        function getAppearences(cards){
-            let appearencesElement = document.getElementById("appearences")
+//         function getAppearences(cards){
+//             let appearencesElement = document.getElementById("appearences")
 
-            let appearences = cards[0].appearences
+//             let appearences = cards[0].appearences
 
-            appearencesElement.innerText = appearences    // nameElement.innerText = `Name: + ${name}`
+//             appearencesElement.innerText = appearences    // nameElement.innerText = `Name: + ${name}`
             
-        }
-        getAppearences(cards)   
+//         }
+//         getAppearences(cards)   
 
-            function getGoals(cards){
-                let goalsElement = document.getElementById("goals")
+//             function getGoals(cards){
+//                 let goalsElement = document.getElementById("goals")
 
-                let goals = cards[0].goals
+//                 let goals = cards[0].goals
 
-                goalsElement.innerText = goals    // nameElement.innerText = `Name: + ${name}`
+//                 goalsElement.innerText = goals    // nameElement.innerText = `Name: + ${name}`
                 
-            }
-            getGoals(cards)   
+//             }
+//             getGoals(cards)   
 
-                function getWins(cards){
-                    let winsElement = document.getElementById("wins")
+//                 function getWins(cards){
+//                     let winsElement = document.getElementById("wins")
 
-                    let wins = cards[0].wins
+//                     let wins = cards[0].wins
 
-                    winsElement.innerText = wins    // nameElement.innerText = `Name: + ${name}`
+//                     winsElement.innerText = wins    // nameElement.innerText = `Name: + ${name}`
                     
-                }
-                getWins(cards) 
+//                 }
+//                 getWins(cards) 
 
-                    function getLoses(cards){
-                        let losesElement = document.getElementById("loses")
+//                     function getLoses(cards){
+//                         let losesElement = document.getElementById("loses")
 
-                        let loses = cards[0].loses
+//                         let loses = cards[0].loses
 
-                        losesElement.innerText = loses    // nameElement.innerText = `Name: + ${name}`
+//                         losesElement.innerText = loses    // nameElement.innerText = `Name: + ${name}`
                         
-                    }
-                    getLoses(cards) 
+//                     }
+//                     getLoses(cards) 
 
-                        function getAssists(cards){
-                            let assistsElement = document.getElementById("assists")
+//                         function getAssists(cards){
+//                             let assistsElement = document.getElementById("assists")
 
-                            let assists = cards[0].assists
+//                             let assists = cards[0].assists
 
-                            assistsElement.innerText = assists    // nameElement.innerText = `Name: + ${name}`
+//                             assistsElement.innerText = assists    // nameElement.innerText = `Name: + ${name}`
                             
-                        }
-                        getAssists(cards)
+//                         }
+//                         getAssists(cards)
 
-                            function getTackles(cards){
-                                let tacklesElement = document.getElementById("tackles")
+//                             function getTackles(cards){
+//                                 let tacklesElement = document.getElementById("tackles")
 
-                                let tackles = cards[0].tackles
+//                                 let tackles = cards[0].tackles
 
-                                tacklesElement.innerText = tackles    // nameElement.innerText = `Name: + ${name}`
+//                                 tacklesElement.innerText = tackles    // nameElement.innerText = `Name: + ${name}`
                                 
-                            }
-                            getTackles(cards)
+//                             }
+//                             getTackles(cards)
 
-                                function getFouls(cards){
-                                    let foulsElement = document.getElementById("fouls")
+//                                 function getFouls(cards){
+//                                     let foulsElement = document.getElementById("fouls")
 
-                                    let fouls = cards[0].fouls
+//                                     let fouls = cards[0].fouls
 
-                                    foulsElement.innerText = fouls    // nameElement.innerText = `Name: + ${name}`
+//                                     foulsElement.innerText = fouls    // nameElement.innerText = `Name: + ${name}`
                                     
-                                }
-                                getFouls(cards)
+//                                 }
+//                                 getFouls(cards)
 
-                                    function getSaves(cards){
-                                        let savesElement = document.getElementById("saves")
+//                                     function getSaves(cards){
+//                                         let savesElement = document.getElementById("saves")
 
-                                        let saves = cards[0].saves
+//                                         let saves = cards[0].saves
 
-                                        savesElement.innerText = saves    // nameElement.innerText = `Name: + ${name}`
+//                                         savesElement.innerText = saves    // nameElement.innerText = `Name: + ${name}`
                                         
-                                    }
-                                    getSaves(cards)
-}
-getStats(cards)
+//                                     }
+//                                     getSaves(cards)
+// }
+// getStats(cards)
 
 
 
