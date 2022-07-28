@@ -1,4 +1,4 @@
-const cards = [
+let cards = [
     {id: 1, name: "Mohamed Salah", appearences: 35, goals: 23, wins: 25, loses: 2, assists: 13, tackles: 17, fouls: 12, saves: 0, img: 'Mohamed Salah.png'},
     {id: 2, name: "Sadio Mané", appearences: 34, goals: 16, wins: 24, loses: 2, assists: 2, tackles: 33, fouls: 50, saves: 0, img: 'Sadio Mané.png'},
     {id: 3, name: "Son Heung-Min", appearences: 35, goals: 23, wins: 21, loses: 9, assists: 7, tackles: 15, fouls: 14, saves: 0, img: 'Son Heung-Min.png'},
@@ -31,11 +31,6 @@ const cards = [
     {id: 30, name: "Davinson Sánchez", appearences: 23, goals: 2, wins: 14, loses: 5, assists: 0, tackles: 41, fouls: 16, saves: 0, img: 'Davinson Sánchez.png'}
 ]
 
-const goals = document.getElementById("goals");
-
-console.log(goals)
-
-
 //Players cards, socres and current updated cards
 let player1Cards = [];
 let player2Cards = [];
@@ -43,8 +38,8 @@ let player2Cards = [];
 let player1Current = []
 let player2Current = []
 
-let player1ImageDisplay = document.getElementById(player1Image) // not put tag in html, currently using default pic
-let player2ImageDisplay = document.getElementById(player2Image) // not put tag in html, currently using default pic
+// let player1ImageDisplay = document.getElementById(player1Image) // not put tag in html, currently using default pic
+// let player2ImageDisplay = document.getElementById(player2Image) // not put tag in html, currently using default pic
 
 let player1Score = 0;
 let player2Score = 0;
@@ -58,46 +53,106 @@ let messageDisplay = document.getElementById("message-display")
 //work out how to randomly shuffle the footballer cards
 //=====================================================================================================
 
-function shuffleCards(){
-    let hand = cards.length;
-    let player1Hand = 0;
-    let player2Hand = 0;
+// function shuffleCards(){
+//     let hand = cards.length;
+//     let player1Hand = 0;
+//     let player2Hand = 0;
 
-    while(--hand > 0) {
-        let cardIndex = Math.floor(Math.random() * (hand + 1)); //important to add 1 to make sure all the 30 cards are used
-        let randomCards = cards.splice(cardIndex, 1);
+//     while(--hand > 0) {
+//         let cardIndex = Math.floor(Math.random() * (hand + 1)); //important to add 1 to make sure all the 30 cards are used
+//         let randomCards = cards.splice(cardIndex, 1);
 
-        if(player1Hand>player2Hand){
-            player2Cards.push(randomCards[0]);
-            player2Hand +=1;
-        } else if(player1Hand == player2Hand){
-            player1Cards.push(randomCards[0]);
-            player1Hand +=1;
-        }
-    }
-}
+//         console.log(cardIndex)
+//         // console.log(randomCards)
+//         // let shuffeledcards=[]
+//         // shuffeledcards.push(randomCards)
+//         // console.log(shuffeledcards)
+        
+
+
+//         if(player1Hand>=player2Hand){
+//             player2Cards.push(randomCards[0]);
+//             player2Hand +=1;
+//         } else if(player1Hand <= player2Hand){
+//             player1Cards.push(randomCards[0]);
+//             player1Hand +=1;
+//         }
+//     }
+//     console.log(player1Hand)
+//     console.log(player2Hand)
+//     console.log(player1Cards)
+//     console.log(player2Cards)
+// }
+//
+// cant get it to split evenly
+
+let player1Hand = [];
+let player2Hand = [];
+
+function shuffleCards() { cards.sort(() => Math.random() - 0.5); console.log(cards)/*mixes the 30 card up*/; return cards };
+
+shuffleCards();
+
 
 //=====================================================================================================
 //work out how to randomly select a card from each players hand
 //=====================================================================================================
 
-function drawnCard(){
-    let player1 = Math.floor((math.random()*player1Cards.length));
-    let player2 = Math.floor((Math.random()*player2Cards.length));
+// function drawnCard(){
+//     let player1 = Math.floor((Math.random()*player1Cards.length));
+//     let player2 = Math.floor((Math.random()*player2Cards.length));
 
-    player1Current.push(player1Cards.splice(player1, 1)[0]); //Takes ONE card from the hand just created
-    player2Current.push(player2Cards.splice(player2, 1)[0]);
+//     player1Current.push(player1Cards.splice(player1, 1)[0]); //Takes ONE card from the hand just created
+//     player2Current.push(player2Cards.splice(player2, 1)[0]);
 
     //if have time pull the image for each footballer
 
+    // console.log(player1)
+    // console.log(player1[0]) // why undefined
+    // console.log(player2)
 
+// }
+
+for (i=0;i<30;i++){
+    if ([i] % 2 != 0){
+        player1Hand.push(cards[i])
+    } else if ([i] % 2 == 0){
+        player2Hand.push(cards[i])
+    }
 }
+
+console.log(player1Hand) //15 card in player1s hand
+console.log(player2Hand) //15 card in player2s hand
+
+//=====================================================================================================
+//draw out player1 card - this bit was a test, shoulnt need
+//=====================================================================================================
+
+// function drawPlayer1Card(){
+//     document.getElementById("name") = player1Card.name;
+//     document.getElementById("appearences") = player1Card.appearences;
+//     document.getElementById("goals") = player1Card.goals;
+//     document.getElementById("wins") = player1Card.wins;
+//     document.getElementById("loses") = player1Card.loses;
+//     document.getElementById("assists") = player1Card.assists;
+//     document.getElementById("tackles") = player1Card.tackles;
+//     document.getElementById("fouls") = player1Card.fouls;
+//     document.getElementById("saves") = player1Card.saves;
+// }
+
+// drawPlayer1Card()
+
+// console.log(drawPlayer1Card)
 
 //=====================================================================================================
 //work out how to compare the stats against the computers stats
 //=====================================================================================================
 
 function compare(stat){
+
+console.log(`the player 1 ${stat} is: ${player1Current[0][stat]}`)
+console.log(`the player 2 ${stat} is: ${player1Current[0][stat]}`)
+
     let player1Stat = player1Current[0][stat];
     let player2Stat = player2Current[0][stat];
 
@@ -123,21 +178,21 @@ function updateResult(result){
         player1Cards.push(player2Current.splice(0,1)[0]); //take player2 card and put it to the back of deck, do the same with player1 winning card
         player1Cards.push(player1Current.splice(0,1)[0]);
         messageDisplay.textContent = `Player 1 wins the round!`;
-        setTimeout( () => {messageDisplay.style.display = "none"}, 2000) //message from above goes after 2 seconds
+        setTimeout( () => {messageDisplay.style.display = "none"}, 5000) //message from above goes after 5 seconds
         playGame();
     }else if(result=="player2-win"){
         player2Score +=1
         player2ScoreDisplay.textContent = `Computer score: ${player2Score}`;
-        player2Cards.push(player1Current.splice(0,1)[0])  
-        player2Cards.push(player2Current.splice(0,1)[0])
+        player2Cards.push(player1Current.splice(0,1)[0]);  
+        player2Cards.push(player2Current.splice(0,1)[0]);
         messageDisplay.textContent = `The Computer wins the round!`;
-        setTimeout( () => {messageDisplay.style.display = "none"}, 2000) //message from above goes after 2 seconds
+        setTimeout( () => {messageDisplay.style.display = "none"}, 5000) //message from above goes after 5 seconds
         playGame();  
     }else{
         messageDisplay.textContent = `Draw!`;
-        player1Cards.push(player1Current.splice(0,1)[0]);
-        player2Cards.push(player2Current.splice(0,1)[0])
-        playGame()
+        player1Cards.push(player1Current.splice(0,1)[0]); //card to the back of own deck
+        player2Cards.push(player2Current.splice(0,1)[0]);
+        playGame();
     }
 }
 
@@ -165,13 +220,54 @@ function playGame() {
 
 //do i need a rest button or just refresh page?
 
-// appearences-btn.addEventListener("click", () => {
-//     alert("haha you thought that would work?")
-// })
+const appearencesBtn = document.getElementById("appearences");
+const goalsBtn = document.getElementById("goals");
+const winsBtn = document.getElementById("wins");
+const losesBtn = document.getElementById("loses");
+const assistsBtn = document.getElementById("assists");
+const tacklesBtn = document.getElementById("tackles");
+const foulsBtn = document.getElementById("fouls");
+const savesBtn = document.getElementById("saves");
+
+
+appearencesBtn.addEventListener("click", () => {
+    compare("appearences");
+})
+
+goalsBtn.addEventListener("click", () => {
+    compare("goals");
+})
+
+winsBtn.addEventListener("click", () => {
+    compare("wins");
+})
+
+losesBtn.addEventListener("click", () => {
+    compare("loses");
+})
+
+assistsBtn.addEventListener("click", () => {
+    compare("assists");
+})
+
+tacklesBtn.addEventListener("click", () => {
+    compare("tackles");
+})
+
+foulsBtn.addEventListener("click", () => {
+    compare("fouls");
+})
+
+savesBtn.addEventListener("click", () => {
+    compare("saves");
+})
 
 //=====================================================================================================
 //call fucntions to start game
 //=====================================================================================================
+
+// shuffleCards();
+// drawnCard();
 
 
 //=====================================================================================================
