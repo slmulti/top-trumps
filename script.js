@@ -125,47 +125,85 @@ console.log(player1Hand) //15 card in player1s hand
 console.log(player2Hand) //15 card in player2s hand
 
 //=====================================================================================================
-//draw out player1 card - this bit was a test, shoulnt need
+//draw out player1 card and computer card
 //=====================================================================================================
 
-// function drawPlayer1Card(){
-//     document.getElementById("name") = player1Card.name;
-//     document.getElementById("appearences") = player1Card.appearences;
-//     document.getElementById("goals") = player1Card.goals;
-//     document.getElementById("wins") = player1Card.wins;
-//     document.getElementById("loses") = player1Card.loses;
-//     document.getElementById("assists") = player1Card.assists;
-//     document.getElementById("tackles") = player1Card.tackles;
-//     document.getElementById("fouls") = player1Card.fouls;
-//     document.getElementById("saves") = player1Card.saves;
-// }
+player1Current=player1Hand.shift()
+console.log(player1Current)
 
-// drawPlayer1Card()
+    function drawPlayer1Card(){
+        // document.getElementById("footballer").src = player1Current.img;
+        document.getElementById("name").innerText = player1Current.name;
+        document.getElementById("appearences").innerText = player1Current.appearences;
+        document.getElementById("goals").innerText = player1Current.goals;
+        document.getElementById("wins").innerText = player1Current.wins;
+        document.getElementById("loses").innerText = player1Current.loses;
+        document.getElementById("assists").innerText = player1Current.assists;
+        document.getElementById("tackles").innerText = player1Current.tackles;
+        document.getElementById("fouls").innerText = player1Current.fouls;
+        document.getElementById("saves").innerText = player1Current.saves;
+    }
 
-// console.log(drawPlayer1Card)
+    drawPlayer1Card()
+
+    function blankPlayer2Card(){
+        document.getElementById("name2").innerText = "?????";
+        document.getElementById("appearences2").innerText = "?????";
+        document.getElementById("goals2").innerText = "?????";
+        document.getElementById("wins2").innerText = "?????";
+        document.getElementById("loses2").innerText = "?????";
+        document.getElementById("assists2").innerText = "?????";
+        document.getElementById("tackles2").innerText = "?????";
+        document.getElementById("fouls2").innerText = "?????";
+        document.getElementById("saves2").innerText = "?????";
+    }
+
+    blankPlayer2Card()
+
+player2Current=player2Hand.shift()
+console.log(player2Current)
+
+    function drawPlayer2Card(){
+        document.getElementById("name2").innerText = player2Current.name;
+        document.getElementById("appearences2").innerText = player2Current.appearences;
+        document.getElementById("goals2").innerText = player2Current.goals;
+        document.getElementById("wins2").innerText = player2Current.wins;
+        document.getElementById("loses2").innerText = player2Current.loses;
+        document.getElementById("assists2").innerText = player2Current.assists;
+        document.getElementById("tackles2").innerText = player2Current.tackles;
+        document.getElementById("fouls2").innerText = player2Current.fouls;
+        document.getElementById("saves2").innerText = player2Current.saves;
+    }
+
+    drawPlayer2Card()
+
 
 //=====================================================================================================
 //work out how to compare the stats against the computers stats
 //=====================================================================================================
 
-function compare(stat){
 
-console.log(`the player 1 ${stat} is: ${player1Current[0][stat]}`)
-console.log(`the player 2 ${stat} is: ${player1Current[0][stat]}`)
 
-    let player1Stat = player1Current[0][stat];
-    let player2Stat = player2Current[0][stat];
 
-    if( stat=="appearences" || stat=="goals" || stat=="wins" || stat=="loses" || stat=="assists" || stat=="tackles" || stat=="fouls" || stat=="saves"){
-        if(player1Stat>player2Stat){
-            updateResult("player1-win");
-        }else if(player2Stat>player1Stat){
-            updateResult("player2-win");
-        } else{
-            updateResult("draw")
-        } 
-    }
-}
+
+// function compare(stat){
+
+// console.log(`the player 1 ${stat} is: ${player1Current[0][stat]}`)
+// console.log(`the player 2 ${stat} is: ${player1Current[0][stat]}`)
+
+//     let player1Stat = player1Current[0][stat];
+//     let player2Stat = player2Current[0][stat];
+
+//     if( stat=="appearences" || stat=="goals" || stat=="wins" || stat=="loses" || stat=="assists" || stat=="tackles" || stat=="fouls" || stat=="saves"){
+//         if(player1Stat>player2Stat){
+//             updateResult("player1-win");
+//         }else if(player2Stat>player1Stat){
+//             updateResult("player2-win");
+//         } else{
+//             updateResult("draw")
+//         } 
+//     }
+// }
 
 //=====================================================================================================
 //work out where and how to display message depending on who won and then update score and move on to next round
