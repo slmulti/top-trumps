@@ -53,39 +53,6 @@ let messageDisplay = document.getElementById("message-display")
 //work out how to randomly shuffle the footballer cards
 //=====================================================================================================
 
-// function shuffleCards(){
-//     let hand = cards.length;
-//     let player1Hand = 0;
-//     let player2Hand = 0;
-
-//     while(--hand > 0) {
-//         let cardIndex = Math.floor(Math.random() * (hand + 1)); //important to add 1 to make sure all the 30 cards are used
-//         let randomCards = cards.splice(cardIndex, 1);
-
-//         console.log(cardIndex)
-//         // console.log(randomCards)
-//         // let shuffeledcards=[]
-//         // shuffeledcards.push(randomCards)
-//         // console.log(shuffeledcards)
-        
-
-
-//         if(player1Hand>=player2Hand){
-//             player2Cards.push(randomCards[0]);
-//             player2Hand +=1;
-//         } else if(player1Hand <= player2Hand){
-//             player1Cards.push(randomCards[0]);
-//             player1Hand +=1;
-//         }
-//     }
-//     console.log(player1Hand)
-//     console.log(player2Hand)
-//     console.log(player1Cards)
-//     console.log(player2Cards)
-// }
-//
-// cant get it to split evenly
-
 let player1Hand = [];
 let player2Hand = [];
 
@@ -97,21 +64,6 @@ shuffleCards();
 //=====================================================================================================
 //work out how to randomly select a card from each players hand
 //=====================================================================================================
-
-// function drawnCard(){
-//     let player1 = Math.floor((Math.random()*player1Cards.length));
-//     let player2 = Math.floor((Math.random()*player2Cards.length));
-
-//     player1Current.push(player1Cards.splice(player1, 1)[0]); //Takes ONE card from the hand just created
-//     player2Current.push(player2Cards.splice(player2, 1)[0]);
-
-    //if have time pull the image for each footballer
-
-    // console.log(player1)
-    // console.log(player1[0]) // why undefined
-    // console.log(player2)
-
-// }
 
 for (i=0;i<30;i++){
     if ([i] % 2 != 0){
@@ -131,7 +83,10 @@ console.log(player2Hand) //15 card in player2s hand
 player1Current=player1Hand.shift()
 console.log(player1Current)
 
+// let footballerImg = document.getElementById('footballer')
+
     function drawPlayer1Card(){
+        // footballerImg.src = `${player1Hand.img}`
         // document.getElementById("footballer").src = player1Current.img;
         document.getElementById("name").innerText = player1Current.name;
         document.getElementById("appearences").innerText = player1Current.appearences;
@@ -158,7 +113,7 @@ console.log(player1Current)
         document.getElementById("saves2").innerText = "?????";
     }
 
-    blankPlayer2Card()
+    // blankPlayer2Card()
 
 player2Current=player2Hand.shift()
 console.log(player2Current)
@@ -182,74 +137,196 @@ console.log(player2Current)
 //work out how to compare the stats against the computers stats
 //=====================================================================================================
 
+const appearencesBtn = document.getElementById("appearences-btn");
+const goalsBtn = document.getElementById("goals-btn");
+const winsBtn = document.getElementById("wins-btn");
+const losesBtn = document.getElementById("loses-btn");
+const assistsBtn = document.getElementById("assists-btn");
+const tacklesBtn = document.getElementById("tackles-btn");
+const foulsBtn = document.getElementById("fouls-btn");
+const savesBtn = document.getElementById("saves-btn");
 
+appearencesBtn.addEventListener('click', appearencesStatComp);
 
+console.log(player1Current.appearences)
+console.log(player2Current.appearences)
 
+function appearencesStatComp(){
+    if(player1Current.appearences > player2Current.appearences){
+    console.log(`You Win this round, ${player1Current.name}'s stat of ${player1Current.appearences} is greater than ${player2Current.appearences}`)
+    // endOfRound('playerWins')
+    } else if(player1Current.appearences < player2Current.appearences){
+    console.log(`You loose this round, ${player2Current.name}'s stat of ${player2Current.appearences} is greater than ${player1Current.appearences}`)
+    // endOfRound('CPUWins')
+    } else {
+        console.log(`It's a Tie! Both ${player1Current.name} and ${player2Current.name} share the same stat of ${player1Current.loses}`)    
+    }
+}
 
-// function compare(stat){
+goalsBtn.addEventListener('click', goalsStatComp);
 
-// console.log(`the player 1 ${stat} is: ${player1Current[0][stat]}`)
-// console.log(`the player 2 ${stat} is: ${player1Current[0][stat]}`)
+console.log(player1Current.goals)
+console.log(player2Current.goals)
 
-//     let player1Stat = player1Current[0][stat];
-//     let player2Stat = player2Current[0][stat];
+function goalsStatComp(){
+    if(player1Current.goals > player2Current.goals){
+    console.log(`You Win this round, ${player1Current.name}'s stat of ${player1Current.goals} is greater than ${player2Current.goals}`)
+    // endOfRound('playerWins')
+    } else if(player1Current.goals < player2Current.goals) {
+    console.log(`You loose this round, ${player2Current.name}'s stat of ${player2Current.goals} is greater than ${player1Current.goals}`)
+    // endOfRound('CPUWins')
+    } else {
+        console.log(`It's a Tie! Both ${player1Current.name} and ${player2Current.name} share the same stat of ${player1Current.loses}`)    
+    }
+}
 
-//     if( stat=="appearences" || stat=="goals" || stat=="wins" || stat=="loses" || stat=="assists" || stat=="tackles" || stat=="fouls" || stat=="saves"){
-//         if(player1Stat>player2Stat){
-//             updateResult("player1-win");
-//         }else if(player2Stat>player1Stat){
-//             updateResult("player2-win");
-//         } else{
-//             updateResult("draw")
-//         } 
-//     }
-// }
+winsBtn.addEventListener('click', winsStatComp);
+
+console.log(player1Current.wins)
+console.log(player2Current.wins)
+
+function winsStatComp(){
+    if(player1Current.wins > player2Current.wins){
+    console.log(`You Win this round, ${player1Current.name}'s stat of ${player1Current.wins} is greater than ${player2Current.wins}`)
+    // endOfRound('playerWins')
+    } else if(player1Current.wins < player2Current.wins) {
+    console.log(`You loose this round, ${player2Current.name}'s stat of ${player2Current.wins} is greater than ${player1Current.wins}`)
+    // endOfRound('CPUWins')
+    } else {
+        console.log(`It's a Tie! Both ${player1Current.name} and ${player2Current.name} share the same stat of ${player1Current.loses}`)    
+    }
+}
+
+losesBtn.addEventListener('click', losesStatComp);
+
+console.log(player1Current.loses)
+console.log(player2Current.loses)
+
+function losesStatComp(){
+    if(player1Current.loses > player2Current.loses){
+    console.log(`You Win this round, ${player1Current.name}'s stat of ${player1Current.loses} is greater than ${player2Current.loses}`)
+    // endOfRound('playerWins')
+    } else if (player1Current.loses < player2Current.loses) {
+    console.log(`You loose this round, ${player2Current.name}'s stat of ${player2Current.loses} is greater than ${player1Current.loses}`)
+    // endOfRound('CPUWins')
+    } else {
+        console.log(`It's a Tie! Both ${player1Current.name} and ${player2Current.name} share the same stat of ${player1Current.loses}`)    
+    }
+}
+
+assistsBtn.addEventListener('click', assistsStatComp);
+
+console.log(player1Current.assists)
+console.log(player2Current.assists)
+
+function assistsStatComp(){
+    if(player1Current.assists > player2Current.assists){
+    console.log(`You Win this round, ${player1Current.name}'s stat of ${player1Current.assists} is greater than ${player2Current.assists}`)
+    // endOfRound('playerWins')
+    } else if (player1Current.assists < player2Current.assists) {
+    console.log(`You loose this round, ${player2Current.name}'s stat of ${player2Current.assists} is greater than ${player1Current.assists}`)
+    // endOfRound('CPUWins')
+    } else {
+        console.log(`It's a Tie! Both ${player1Current.name} and ${player2Current.name} share the same stat of ${player1Current.assists}`)    
+    }
+}
+
+tacklesBtn.addEventListener('click', tacklesStatComp);
+
+console.log(player1Current.tackles)
+console.log(player2Current.tackles)
+
+function tacklesStatComp(){
+    if(player1Current.tackles > player2Current.tackles){
+    console.log(`You Win this round, ${player1Current.name}'s stat of ${player1Current.tackles} is greater than ${player2Current.tackles}`)
+    // endOfRound('playerWins')
+    } else if (player1Current.tackles < player2Current.tackles) {
+    console.log(`You loose this round, ${player2Current.name}'s stat of ${player2Current.tackles} is greater than ${player1Current.tackles}`)
+    // endOfRound('CPUWins')
+    } else {
+        console.log(`It's a Tie! Both ${player1Current.name} and ${player2Current.name} share the same stat of ${player1Current.tackles}`)    
+    }
+}
+
+foulsBtn.addEventListener('click', foulsStatComp);
+
+console.log(player1Current.fouls)
+console.log(player2Current.fouls)
+
+function foulsStatComp(){
+    if(player1Current.fouls > player2Current.fouls){
+    console.log(`You Win this round, ${player1Current.name}'s stat of ${player1Current.fouls} is greater than ${player2Current.fouls}`)
+    // endOfRound('playerWins')
+    } else if (player1Current.fouls < player2Current.tackles) {
+    console.log(`You loose this round, ${player2Current.name}'s stat of ${player2Current.fouls} is greater than ${player1Current.fouls}`)
+    // endOfRound('CPUWins')
+    } else {
+        console.log(`It's a Tie! Both ${player1Current.name} and ${player2Current.name} share the same stat of ${player1Current.fouls}`)    
+    }
+}
+
+savesBtn.addEventListener('click', savesStatComp);
+
+console.log(player1Current.saves)
+console.log(player2Current.saves)
+
+function savesStatComp(){
+    if(player1Current.saves > player2Current.saves){
+    console.log(`You Win this round, ${player1Current.name}'s stat of ${player1Current.saves} is greater than ${player2Current.saves}`)
+    // endOfRound('playerWins')
+    } else if (player1Current.saves < player2Current.saves) {
+    console.log(`You loose this round, ${player2Current.name}'s stat of ${player2Current.saves} is greater than ${player1Current.saves}`)
+    // endOfRound('CPUWins')
+    } else {
+        console.log(`It's a Tie! Both ${player1Current.name} and ${player2Current.name} share the same stat of ${player1Current.saves}`)    
+    }
+}
 
 //=====================================================================================================
 //work out where and how to display message depending on who won and then update score and move on to next round
 //=====================================================================================================
 
-function updateResult(result){
-    if(result=="player1-win"){
-        player1Score +=1
-        player1ScoreDisplay.textContent = `Your score: ${player1Score}`;
-        player1Cards.push(player2Current.splice(0,1)[0]); //take player2 card and put it to the back of deck, do the same with player1 winning card
-        player1Cards.push(player1Current.splice(0,1)[0]);
-        messageDisplay.textContent = `Player 1 wins the round!`;
-        setTimeout( () => {messageDisplay.style.display = "none"}, 5000) //message from above goes after 5 seconds
-        playGame();
-    }else if(result=="player2-win"){
-        player2Score +=1
-        player2ScoreDisplay.textContent = `Computer score: ${player2Score}`;
-        player2Cards.push(player1Current.splice(0,1)[0]);  
-        player2Cards.push(player2Current.splice(0,1)[0]);
-        messageDisplay.textContent = `The Computer wins the round!`;
-        setTimeout( () => {messageDisplay.style.display = "none"}, 5000) //message from above goes after 5 seconds
-        playGame();  
-    }else{
-        messageDisplay.textContent = `Draw!`;
-        player1Cards.push(player1Current.splice(0,1)[0]); //card to the back of own deck
-        player2Cards.push(player2Current.splice(0,1)[0]);
-        playGame();
-    }
-}
+// function updateResult(result){
+//     if(result=="player1-win"){
+//         player1Score +=1
+//         player1ScoreDisplay.textContent = `Your score: ${player1Score}`;
+//         player1Cards.push(player2Current.splice(0,1)[0]); //take player2 card and put it to the back of deck, do the same with player1 winning card
+//         player1Cards.push(player1Current.splice(0,1)[0]);
+//         messageDisplay.textContent = `Player 1 wins the round!`;
+//         setTimeout( () => {messageDisplay.style.display = "none"}, 5000) //message from above goes after 5 seconds
+//         playGame();
+//     }else if(result=="player2-win"){
+//         player2Score +=1
+//         player2ScoreDisplay.textContent = `Computer score: ${player2Score}`;
+//         player2Cards.push(player1Current.splice(0,1)[0]);  
+//         player2Cards.push(player2Current.splice(0,1)[0]);
+//         messageDisplay.textContent = `The Computer wins the round!`;
+//         setTimeout( () => {messageDisplay.style.display = "none"}, 5000) //message from above goes after 5 seconds
+//         playGame();  
+//     }else{
+//         messageDisplay.textContent = `Draw!`;
+//         player1Cards.push(player1Current.splice(0,1)[0]); //card to the back of own deck
+//         player2Cards.push(player2Current.splice(0,1)[0]);
+//         playGame();
+//     }
+// }
 
 //=====================================================================================================
 //determin if the game has ended or if it continues
 //=====================================================================================================
 
-function playGame() {
-    if (player1Cards.length < 30 && player2Cards.length < 30){
-        //play game
-        drawnCard()
-    } else if (player1Cards.length == 30){
-        //loose message
-        messageDisplay.textContent = "You Suck, you were beaten by a computer!!!"
-    } else if (player2Cards.length == 30){
-        //win message
-        messageDisplay.textContent = "The game has finished! Player 1 is the Victor!!!"
-    }
-}
+// function playGame() {
+//     if (player1Cards.length < 30 && player2Cards.length < 30){
+//         //play game
+//         drawnCard()
+//     } else if (player1Cards.length == 30){
+//         //loose message
+//         messageDisplay.textContent = "You Suck, you were beaten by a computer!!!"
+//     } else if (player2Cards.length == 30){
+//         //win message
+//         messageDisplay.textContent = "The game has finished! Player 1 is the Victor!!!"
+//     }
+// }
 
 
 //=====================================================================================================
@@ -258,47 +335,47 @@ function playGame() {
 
 //do i need a rest button or just refresh page?
 
-const appearencesBtn = document.getElementById("appearences");
-const goalsBtn = document.getElementById("goals");
-const winsBtn = document.getElementById("wins");
-const losesBtn = document.getElementById("loses");
-const assistsBtn = document.getElementById("assists");
-const tacklesBtn = document.getElementById("tackles");
-const foulsBtn = document.getElementById("fouls");
-const savesBtn = document.getElementById("saves");
+// const appearencesBtn = document.getElementById("appearences");
+// const goalsBtn = document.getElementById("goals");
+// const winsBtn = document.getElementById("wins");
+// const losesBtn = document.getElementById("loses");
+// const assistsBtn = document.getElementById("assists");
+// const tacklesBtn = document.getElementById("tackles");
+// const foulsBtn = document.getElementById("fouls");
+// const savesBtn = document.getElementById("saves");
 
 
-appearencesBtn.addEventListener("click", () => {
-    compare("appearences");
-})
+// appearencesBtn.addEventListener("click", () => {
+//     compare("appearences");
+// })
 
-goalsBtn.addEventListener("click", () => {
-    compare("goals");
-})
+// goalsBtn.addEventListener("click", () => {
+//     compare("goals");
+// })
 
-winsBtn.addEventListener("click", () => {
-    compare("wins");
-})
+// winsBtn.addEventListener("click", () => {
+//     compare("wins");
+// })
 
-losesBtn.addEventListener("click", () => {
-    compare("loses");
-})
+// losesBtn.addEventListener("click", () => {
+//     compare("loses");
+// })
 
-assistsBtn.addEventListener("click", () => {
-    compare("assists");
-})
+// assistsBtn.addEventListener("click", () => {
+//     compare("assists");
+// })
 
-tacklesBtn.addEventListener("click", () => {
-    compare("tackles");
-})
+// tacklesBtn.addEventListener("click", () => {
+//     compare("tackles");
+// })
 
-foulsBtn.addEventListener("click", () => {
-    compare("fouls");
-})
+// foulsBtn.addEventListener("click", () => {
+//     compare("fouls");
+// })
 
-savesBtn.addEventListener("click", () => {
-    compare("saves");
-})
+// savesBtn.addEventListener("click", () => {
+//     compare("saves");
+// })
 
 //=====================================================================================================
 //call fucntions to start game
