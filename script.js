@@ -296,7 +296,7 @@ function foulsStatComp(){
         comparisonDisplay.textContent = `You Win this round, ${player1Current.name}'s stat of ${player1Current.fouls} is greater than ${player2Current.fouls}`
         console.log(`You Win this round, ${player1Current.name}'s stat of ${player1Current.fouls} is greater than ${player2Current.fouls}`)
         updateResult('player1-win')
-    } else if (player1Current.fouls < player2Current.tackles) {
+    } else if (player1Current.fouls < player2Current.fouls) {
         comparisonDisplay.textContent = `You loose this round, ${player2Current.name}'s stat of ${player2Current.fouls} is greater than ${player1Current.fouls}`
         console.log(`You loose this round, ${player2Current.name}'s stat of ${player2Current.fouls} is greater than ${player1Current.fouls}`)
         updateResult('player2-win')
@@ -359,16 +359,12 @@ function updateResult(result){
 
 const start = document.getElementById('start');
 
-// this works but is not really the game
+
 function playGame() {
-    // if (player1Hand.length < 30 && player2Hand.length < 30){
-    //     //play game
-    //     // startGame()
-    // } else 
-    if (player2Hand.length == 30){
+    if (player2Hand.length == 30 || player1Hand.length == 0){
         messageDisplay.textContent = "You Suck, you were beaten by a computer!!!"
         start.style.visibility = 'hidden';//hides the next button to stop play
-    } else if (player1Hand.length == 30){
+    } else if (player1Hand.length == 30 || player2Hand.length == 0){
         //win message
         messageDisplay.textContent = "The game has finished! Player 1 is the Victor!!!"
         start.style.visibility = 'hidden';//hides the next button to stop play
