@@ -3,9 +3,9 @@ let cards = [
     {id: 2, name: "Sadio Mané", appearences: 34, goals: 16, wins: 24, loses: 2, assists: 2, tackles: 33, fouls: 50, saves: 0, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p110979.png'},
     {id: 3, name: "Son Heung-Min", appearences: 35, goals: 23, wins: 21, loses: 9, assists: 7, tackles: 15, fouls: 14, saves: 0, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p85971.png'},
     {id: 4, name: "Harry Kane", appearences: 37, goals: 17, wins: 21, loses: 11, assists: 9, tackles: 15, fouls: 42, saves: 0, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p78830.png'},
-    {id: 5, name: "Cristiano Ronaldo", appearences: 30, goals: 18, wins: 14, loses: 9, assists: 3, tackles: 8, fouls: 16, saves: 0, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p14937.png.png'},
+    {id: 5, name: "Cristiano Ronaldo", appearences: 30, goals: 18, wins: 14, loses: 9, assists: 3, tackles: 8, fouls: 16, saves: 0, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p14937.png'},
     {id: 6, name: "Bruno Fernandes", appearences: 36, goals: 10, wins: 14, loses: 12, assists: 6, tackles: 54, fouls: 33, saves: 0, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p141746.png'},
-    {id: 7, name: "Kevin De Bruyne", appearences: 30, goals: 15, wins: 21, loses: 3, assists: 8, tackles: 32, fouls: 21, saves: 0, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p61366.png.png'},
+    {id: 7, name: "Kevin De Bruyne", appearences: 30, goals: 15, wins: 21, loses: 3, assists: 8, tackles: 32, fouls: 21, saves: 0, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p61366.png'},
     {id: 8, name: "Raheem Sterling", appearences: 30, goals: 13, wins: 23, loses: 3, assists: 5, tackles: 23, fouls: 19, saves: 0, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p103955.png'},
     {id: 9, name: "Bukayo Saka", appearences: 38, goals: 11, wins: 22, loses: 13, assists: 7, tackles: 40, fouls: 39, saves: 0, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p223340.png'},
     {id: 10, name: "Emile Smith Rowe", appearences: 33, goals: 10, wins: 18, loses: 12, assists: 2, tackles: 14, fouls: 5, saves: 0, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p209289.png'},
@@ -38,11 +38,8 @@ let player2Cards = [];
 let player1Current = []
 let player2Current = []
 
-// let player1ImageDisplay = document.getElementById(player1Image) // not put tag in html, currently using default pic
-// let player2ImageDisplay = document.getElementById(player2Image) // not put tag in html, currently using default pic
-
-let player1Score = 0;
-let player2Score = 0;
+let player1Score = 15;
+let player2Score = 15;
 
 let player1ScoreDisplay = document.getElementById("player1-score")
 let player2ScoreDisplay = document.getElementById("player2-score")
@@ -63,7 +60,7 @@ shuffleCards();
 
 
 //=====================================================================================================
-//work out how to randomly select a card from each players hand
+//work out how to divide cards from each players hand
 //=====================================================================================================
 
 for (i=0;i<30;i++){
@@ -81,8 +78,13 @@ console.log(player2Hand) //15 card in player2s hand
 //draw out player1 card and computer card
 //=====================================================================================================
 
+function getCard(){
 player1Current=player1Hand.shift() //first card from player 1s hand 
 console.log(player1Current)
+player2Current=player2Hand.shift()
+console.log(player2Current)
+}
+
 
 let footballerImg = document.getElementById('footballer')
 
@@ -100,7 +102,7 @@ let footballerImg = document.getElementById('footballer')
         document.getElementById("saves").innerText = player1Current.saves;
     }
 
-    drawPlayer1Card()
+    
 
     function blankPlayer2Card(){
         document.getElementById("name2").innerText = "?????";
@@ -114,14 +116,28 @@ let footballerImg = document.getElementById('footballer')
         document.getElementById("saves2").innerText = "?????";
     }
 
-    // blankPlayer2Card()
+    blankPlayer2Card()
 
-player2Current=player2Hand.shift()
-console.log(player2Current)
+
 
 let player2FootballerImg = document.getElementById('footballer2')
 
     function drawPlayer2Card(){
+        player2FootballerImg.src = `${player2Current.img}`
+        document.getElementById("footballer2").src = player2Current.img;
+        document.getElementById("name2").innerText = player2Current.name;
+        document.getElementById("appearences2").innerText = "???";
+        document.getElementById("goals2").innerText = "???";
+        document.getElementById("wins2").innerText = "???";
+        document.getElementById("loses2").innerText = "???";
+        document.getElementById("assists2").innerText = "???";
+        document.getElementById("tackles2").innerText = "???";
+        document.getElementById("fouls2").innerText = "???";
+        document.getElementById("saves2").innerText = "???";
+    }
+
+
+    function revealPlayer2Card(){
         player2FootballerImg.src = `${player2Current.img}`
         document.getElementById("footballer2").src = player2Current.img;
         document.getElementById("name2").innerText = player2Current.name;
@@ -135,8 +151,20 @@ let player2FootballerImg = document.getElementById('footballer2')
         document.getElementById("saves2").innerText = player2Current.saves;
     }
 
-    drawPlayer2Card()
+//=====================================================================================================
+//call functions to start game and update to next button
+//=====================================================================================================
 
+
+const startBtn = document.getElementById("start")    
+startBtn.addEventListener('click', startGame)
+    
+    function startGame(){
+        getCard()
+        drawPlayer1Card()
+        drawPlayer2Card()
+        document.getElementById("start").innerText = "NEXT CARD";
+    }
 
 //=====================================================================================================
 //work out how to compare the stats against the computers stats
@@ -157,6 +185,7 @@ console.log(player1Current.appearences)
 console.log(player2Current.appearences)
 
 function appearencesStatComp(){
+    revealPlayer2Card()
     if(player1Current.appearences > player2Current.appearences){
     comparisonDisplay.textContent = `You Win this round, ${player1Current.name}'s stat of ${player1Current.appearences} is greater than ${player2Current.appearences}` //find better place for this
     console.log(`You Win this round, ${player1Current.name}'s stat of ${player1Current.appearences} is greater than ${player2Current.appearences}`)
@@ -177,6 +206,7 @@ console.log(player1Current.goals)
 console.log(player2Current.goals)
 
 function goalsStatComp(){
+    revealPlayer2Card()
     if(player1Current.goals > player2Current.goals){
     comparisonDisplay.textContent = `You Win this round, ${player1Current.name}'s stat of ${player1Current.goals} is greater than ${player2Current.goals}`
     console.log(`You Win this round, ${player1Current.name}'s stat of ${player1Current.goals} is greater than ${player2Current.goals}`)
@@ -197,6 +227,7 @@ console.log(player1Current.wins)
 console.log(player2Current.wins)
 
 function winsStatComp(){
+    revealPlayer2Card()
     if(player1Current.wins > player2Current.wins){
         comparisonDisplay.textContent = `You Win this round, ${player1Current.name}'s stat of ${player1Current.wins} is greater than ${player2Current.wins}`
         console.log(`You Win this round, ${player1Current.name}'s stat of ${player1Current.wins} is greater than ${player2Current.wins}`)
@@ -217,6 +248,7 @@ console.log(player1Current.loses)
 console.log(player2Current.loses)
 
 function losesStatComp(){
+    revealPlayer2Card()
     if(player1Current.loses > player2Current.loses){
         comparisonDisplay.textContent = `You Win this round, ${player1Current.name}'s stat of ${player1Current.loses} is greater than ${player2Current.loses}`
         console.log(`You Win this round, ${player1Current.name}'s stat of ${player1Current.loses} is greater than ${player2Current.loses}`)
@@ -237,6 +269,7 @@ console.log(player1Current.assists)
 console.log(player2Current.assists)
 
 function assistsStatComp(){
+    revealPlayer2Card()
     if(player1Current.assists > player2Current.assists){
         comparisonDisplay.textContent = `You Win this round, ${player1Current.name}'s stat of ${player1Current.assists} is greater than ${player2Current.assists}`
         console.log(`You Win this round, ${player1Current.name}'s stat of ${player1Current.assists} is greater than ${player2Current.assists}`)
@@ -257,6 +290,7 @@ console.log(player1Current.tackles)
 console.log(player2Current.tackles)
 
 function tacklesStatComp(){
+    revealPlayer2Card()
     if(player1Current.tackles > player2Current.tackles){
         comparisonDisplay.textContent = `You Win this round, ${player1Current.name}'s stat of ${player1Current.tackles} is greater than ${player2Current.tackles}`
         console.log(`You Win this round, ${player1Current.name}'s stat of ${player1Current.tackles} is greater than ${player2Current.tackles}`)
@@ -277,6 +311,7 @@ console.log(player1Current.fouls)
 console.log(player2Current.fouls)
 
 function foulsStatComp(){
+    revealPlayer2Card()
     if(player1Current.fouls > player2Current.fouls){
         comparisonDisplay.textContent = `You Win this round, ${player1Current.name}'s stat of ${player1Current.fouls} is greater than ${player2Current.fouls}`
         console.log(`You Win this round, ${player1Current.name}'s stat of ${player1Current.fouls} is greater than ${player2Current.fouls}`)
@@ -297,6 +332,7 @@ console.log(player1Current.saves)
 console.log(player2Current.saves)
 
 function savesStatComp(){
+    revealPlayer2Card() 
     if(player1Current.saves > player2Current.saves){
         comparisonDisplay.textContent = `You Win this round, ${player1Current.name}'s stat of ${player1Current.saves} is greater than ${player2Current.saves}`    
         console.log(`You Win this round, ${player1Current.name}'s stat of ${player1Current.saves} is greater than ${player2Current.saves}`)
@@ -317,25 +353,26 @@ function savesStatComp(){
 
 function updateResult(result){
     if(result=="player1-win"){
-        player1Score +=1
-        player1ScoreDisplay.textContent = `Your score: ${player1Score}`;
-        // player1Cards.push(player2Current.splice(0,1)[0]); //take player2 card and put it to the back of deck, do the same with player1 winning card
-        // player1Cards.push(player1Current.splice(0,1)[0]);
+        // player1Score +=1
+        player1Hand.push(player1Current)
+        player1Hand.push(player2Current)
+        console.log(player1Current)
+        player1NewCardTotal = player1Hand.length
+        console.log(player1NewCardTotal)
+        player1ScoreDisplay.textContent = `You have ${player1NewCardTotal} Cards`;
         messageDisplay.textContent = `Player 1 wins the round!`;
-        // setTimeout( () => {messageDisplay.style.display = "none"}, 5000) //message from above goes after 5 seconds
         playGame();
     }else if(result=="player2-win"){
-        player2Score +=1
-        player2ScoreDisplay.textContent = `Computer score: ${player2Score}`;
-        // player2Cards.push(player1Current.splice(0,1)[0]);  
-        // player2Cards.push(player2Current.splice(0,1)[0]);
+        // player2Score +=1
+        player2Hand.push(player1Current)
+        player2Hand.push(player2Current)  
+        player2NewCardTotal = player2Hand.length
+        console.log(player2NewCardTotal)
+        player2ScoreDisplay.textContent = `The Computer has ${player2NewCardTotal} Cards`;
         messageDisplay.textContent = `The Computer wins the round!`;
-        // setTimeout( () => {messageDisplay.style.display = "none"}, 5000) //message from above goes after 5 seconds
         playGame();  
     }else{
         messageDisplay.textContent = `Draw!`;
-        // player1Cards.push(player1Current.splice(0,1)[0]); //card to the back of own deck
-        // player2Cards.push(player2Current.splice(0,1)[0]);
         playGame();
     }
 }
@@ -344,174 +381,20 @@ function updateResult(result){
 //determin if the game has ended or if it continues
 //=====================================================================================================
 
+const start = document.getElementById('start');
+
+// this works but is not really the game
 function playGame() {
-    if (player1Cards.length < 30 && player2Cards.length < 30){
+    if (player1Score < 30 && player2Score < 30){
         //play game
-        drawnCard()
-    } else if (player1Cards.length == 30){
-        //loose message
+        // startGame()
+    } else if (player2Score == 30){
         messageDisplay.textContent = "You Suck, you were beaten by a computer!!!"
-    } else if (player2Cards.length == 30){
+        start.style.visibility = 'hidden';//hides the next button to stop play
+    } else if (player1Score == 30){
         //win message
         messageDisplay.textContent = "The game has finished! Player 1 is the Victor!!!"
+        start.style.visibility = 'hidden';//hides the next button to stop play
+        
     }
 }
-
-
-//=====================================================================================================
-//add event listeners on click for each button to intiate compare stats
-//=====================================================================================================
-
-//do i need a rest button or just refresh page?
-
-// const appearencesBtn = document.getElementById("appearences");
-// const goalsBtn = document.getElementById("goals");
-// const winsBtn = document.getElementById("wins");
-// const losesBtn = document.getElementById("loses");
-// const assistsBtn = document.getElementById("assists");
-// const tacklesBtn = document.getElementById("tackles");
-// const foulsBtn = document.getElementById("fouls");
-// const savesBtn = document.getElementById("saves");
-
-
-// appearencesBtn.addEventListener("click", () => {
-//     compare("appearences");
-// })
-
-// goalsBtn.addEventListener("click", () => {
-//     compare("goals");
-// })
-
-// winsBtn.addEventListener("click", () => {
-//     compare("wins");
-// })
-
-// losesBtn.addEventListener("click", () => {
-//     compare("loses");
-// })
-
-// assistsBtn.addEventListener("click", () => {
-//     compare("assists");
-// })
-
-// tacklesBtn.addEventListener("click", () => {
-//     compare("tackles");
-// })
-
-// foulsBtn.addEventListener("click", () => {
-//     compare("fouls");
-// })
-
-// savesBtn.addEventListener("click", () => {
-//     compare("saves");
-// })
-
-//=====================================================================================================
-//call fucntions to start game
-//=====================================================================================================
-
-// shuffleCards();
-// drawnCard();
-
-
-//=====================================================================================================
-//getting the stats to display on page
-
-// function getStats(cards){
-
-//     function getName(cards){
-//         let nameElement = document.getElementById("name")
-
-//         let name = cards[0].name
-
-//         nameElement.innerText = name    // nameElement.innerText = `Name: + ${name}`
-        
-//     }
-//     getName(cards)
-
-//         function getAppearences(cards){
-//             let appearencesElement = document.getElementById("appearences")
-
-//             let appearences = cards[0].appearences
-
-//             appearencesElement.innerText = appearences    // nameElement.innerText = `Name: + ${name}`
-            
-//         }
-//         getAppearences(cards)   
-
-//             function getGoals(cards){
-//                 let goalsElement = document.getElementById("goals")
-
-//                 let goals = cards[0].goals
-
-//                 goalsElement.innerText = goals    // nameElement.innerText = `Name: + ${name}`
-                
-//             }
-//             getGoals(cards)   
-
-//                 function getWins(cards){
-//                     let winsElement = document.getElementById("wins")
-
-//                     let wins = cards[0].wins
-
-//                     winsElement.innerText = wins    // nameElement.innerText = `Name: + ${name}`
-                    
-//                 }
-//                 getWins(cards) 
-
-//                     function getLoses(cards){
-//                         let losesElement = document.getElementById("loses")
-
-//                         let loses = cards[0].loses
-
-//                         losesElement.innerText = loses    // nameElement.innerText = `Name: + ${name}`
-                        
-//                     }
-//                     getLoses(cards) 
-
-//                         function getAssists(cards){
-//                             let assistsElement = document.getElementById("assists")
-
-//                             let assists = cards[0].assists
-
-//                             assistsElement.innerText = assists    // nameElement.innerText = `Name: + ${name}`
-                            
-//                         }
-//                         getAssists(cards)
-
-//                             function getTackles(cards){
-//                                 let tacklesElement = document.getElementById("tackles")
-
-//                                 let tackles = cards[0].tackles
-
-//                                 tacklesElement.innerText = tackles    // nameElement.innerText = `Name: + ${name}`
-                                
-//                             }
-//                             getTackles(cards)
-
-//                                 function getFouls(cards){
-//                                     let foulsElement = document.getElementById("fouls")
-
-//                                     let fouls = cards[0].fouls
-
-//                                     foulsElement.innerText = fouls    // nameElement.innerText = `Name: + ${name}`
-                                    
-//                                 }
-//                                 getFouls(cards)
-
-//                                     function getSaves(cards){
-//                                         let savesElement = document.getElementById("saves")
-
-//                                         let saves = cards[0].saves
-
-//                                         savesElement.innerText = saves    // nameElement.innerText = `Name: + ${name}`
-                                        
-//                                     }
-//                                     getSaves(cards)
-// }
-// getStats(cards)
-
-
-
-
-

@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Top Trumps</title>
-    <!-- <script src="/model/pokedex.js" defer></script> -->
     <script src="script.js" defer></script>
     <script src="TopTrumpCard.js" defer></script>
     <script src="TopTrumpQueue.js" defer></script>
@@ -21,22 +20,19 @@
     <p>In this game you will have to pick which stat your current player has that you think will be greater than the computer.</p>
     <p>First to collect all 30 cards wins.</p>
     <p>Good Luck!</p>
-    <button onclick="myFunction()">Click Me</button>
+    <div id="'game-buttons">
+      <button id="start">START GAME</button>         
+    </div>
   </div>
 
-  <script>
-    function myFunction() {
-      alert("haha you thought any of this would work?");
-    }
-    </script>
 
-    <div><h1 id="message-display">This is where the result will be displayed</h1></div>
+    <div><h1 id="message-display">Click 'Start Game' then choose a Stat to Play!!</h1></div>
 
 <div class="playing-area">
   <div class = "player1">
     <h3>Player 1 Cards</h3>
     <h2 id="name">Name:</h2>
-    <img src='' alt="unknown footballer" id="footballer"/>
+    <img src='./imgs/football-player-silhouette.png' alt="unknown footballer" id="footballer"/>
     <table class = "stats">
       <tr>
         <td><button id="appearences-btn">Appearences:</button></td>
@@ -64,43 +60,43 @@
       </tr>
     </table>   
         <!-- <img src="" alt=""> -->
-      <h3 id="player1-score"> You have X Cards</h3>
+      <h3 id="player1-score"> You have 15 Cards</h3>
   </div>
 
   <div class = "player2">
     <h3>Computers Cards</h3>
     <h2 id="name2">Name:</h2>
-    <img src="" alt="unknown footballer" id="footballer2"/>
-    <table class = "stats">
+    <img src='./imgs/football-player-silhouette.png' alt="unknown footballer" id="footballer2"/>
+    <table class = "player2Stats">
       <tr>
-        <td><h4>Appearences:</h4></td>
+        <td><button id="appearences2-btn">Appearences:</button></td>
         <td id="appearences2">?????</td>
-        <td><h4>Goals:</h4></td>
+        <td><button id="goals2-btn">Goals:</button></td>
         <td id="goals2">?????</td>
       </tr>
       <tr>
-        <td><h4>Wins:</h4></td>
+        <td><button id="wins2-btn">Wins:</button></td>
         <td id="wins2">?????</td>
-        <td><h4>Loses:</h4></td>
+        <td><button id="loses2-btn">Loses:</button></td>
         <td id="loses2">?????</td>
       </tr>
       <tr>
-        <td><h4>Assists:</h4></td>
+        <td><button id="assists2-btn">Assists:</button></td>
         <td id="assists2">?????</td>
-        <td><h4>Tackles:</h4></td>
+        <td><button id="tackles2-btn">Tackles:</button></td>
         <td id="tackles2">?????</td>
       </tr>
       <tr>
-        <td><h4>Fouls:</h4></td>
+        <td><button id="fouls2-btn">Fouls:</button></td>
         <td id="fouls2">?????</td>
-        <td><h4>Saves:</h4></td>
+        <td><button id="saves2-btn">Saves:</button></td>
         <td id="saves2">?????</td>
       </tr>
     </table>   
         <!-- <img src="" alt=""> -->
-    <h3 id="player2-score"> The Computer has X Cards</h3>
+    <h3 id="player2-score"> The Computer has 15 Cards</h3>
   </div>
 </div>
 <div>
-  <h2 id="comparison-display">comparison statement</h2>
+  <h2 id="comparison-display"></h2>
 </div>

@@ -40,9 +40,13 @@ h1{
     border: 1px solid #322A15;
     border-radius: .25rem; 
     width: 40%;
-    height: 800px;
+    height: 650px;
     box-shadow: 5px 5px 5px #322A15;
 }
+
+.player1:hover {
+    transform: scale(1.01);
+  }
 
 .player2{
     display: flex;
@@ -53,9 +57,13 @@ h1{
     border: 1px solid #322A15;
     border-radius: .25rem;
     width: 40%;
-    height: 800px;
+    height: 650px;
     box-shadow: 5px 5px 5px #322A15;
 }
+
+.player2:hover {
+    transform: scale(1.01);
+  }
 
 img{
     height: 300px; 
@@ -68,8 +76,9 @@ img{
 }   
 
 td, th {
-    border: 1px solid #999;
-    margin: .5rem;       
+    /* border: 1px solid #999; */
+    /* margin: .5rem; */
+        
   }
 
   .playing-area{
@@ -85,10 +94,57 @@ td, th {
 
 button{
     cursor: pointer;
+    background-color: #E6CBC2;
+    border: none;
+    font-size: 1.5rem;
+    padding: .5em, .75em;
+    border-radius: .25em;
+}
+
+#appearences-btn:hover{
+    background-color: #A4895E;
+}
+
+#goals-btn:hover{
+    background-color: #A4895E;
+}
+
+#wins-btn:hover{
+    background-color: #A4895E;
+}
+
+#loses-btn:hover{
+    background-color: #A4895E;
+}
+
+#assists-btn:hover{
+    background-color: #A4895E;
+}
+
+#tackles-btn:hover{
+    background-color: #A4895E;
+}
+
+#fouls-btn:hover{
+    background-color: #A4895E;
+}
+
+#saves-btn:hover{
+    background-color: #A4895E;
 }
 
 #comparison-display{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#game-buttons{
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.player2Stats{
+    font-size: 24px;
 }
