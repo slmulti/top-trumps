@@ -143,6 +143,7 @@ startBtn.addEventListener('click', startGame)
         drawPlayer1Card()
         drawPlayer2Card()
         document.getElementById("start").innerText = "NEXT CARD";
+        messageDisplay.textContent = `Select a Stat you think will beat the Opponenents Card`
     }
 
 //=====================================================================================================
