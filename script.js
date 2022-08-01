@@ -16,10 +16,10 @@ let cards = [
     {id: 15, name: "Hugo Lloris", appearences: 38, goals: 0, wins: 22, loses: 11, assists: 0, tackles: 0, fouls: 0, saves: 98, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p37915.png'},
     {id: 16, name: "Édouard Mendy", appearences: 34, goals: 0, wins: 19, loses: 5, assists: 0, tackles: 0, fouls: 1, saves: 73, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p228286.png'},
     {id: 17, name: "Aaron Ramsdale", appearences: 34, goals: 0, wins: 21, loses: 10, assists: 0, tackles: 0, fouls: 0, saves: 90, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p225321.png'},
-    {id: 18, name: "David de Gea", appearences: 38, goals: 0, wins: 16, loses: 12, assists: 0, tackles: 0, fouls: 23, saves: 0, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p51940.png'},
-    {id: 19, name: "Gabriel Magalhães", appearences: 35, goals: 5, wins: 22, loses: 10, assists: 0, tackles: 50, fouls: 8, saves: 189, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p226597.png'},
+    {id: 18, name: "David de Gea", appearences: 38, goals: 0, wins: 16, loses: 12, assists: 0, tackles: 0, fouls: 0, saves: 128, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p51940.png'},
+    {id: 19, name: "Gabriel Magalhães", appearences: 35, goals: 5, wins: 22, loses: 10, assists: 0, tackles: 50, fouls: 8, saves: 0, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p226597.png'},
     {id: 20, name: "Ben White", appearences: 32, goals: 0, wins: 19, loses: 10, assists: 0, tackles: 44, fouls: 19, saves: 0, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p198869.png'},
-    {id: 21, name: "César Azpilicueta", appearences: 35, goals: 4.1, wins: 59860, loses: 8, assists: 189, tackles: 0, fouls: 8, saves: 189, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p41328.png'},
+    {id: 21, name: "César Azpilicueta", appearences: 27, goals: 1, wins: 13, loses: 5, assists: 2, tackles: 51, fouls: 25, saves: 0, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p41328.png'},
     {id: 22, name: "Marcos Alonso", appearences: 28, goals: 4, wins: 12, loses: 6, assists: 4, tackles: 41, fouls: 25, saves: 0, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p82263.png'},
     {id: 23, name: "Joel Matip", appearences: 31, goals: 3, wins: 24, loses: 2, assists: 3, tackles: 47, fouls: 13, saves: 0, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p60914.png'},
     {id: 24, name: "Trent Alexander-Arnold", appearences: 32, goals: 2, wins: 23, loses: 2, assists: 12, tackles: 40, fouls: 12, saves: 0, img: 'https://resources.premierleague.com/premierleague/photos/players/250x250/p169187.png'},
@@ -37,9 +37,6 @@ let player2Cards = [];
 
 let player1Current = []
 let player2Current = []
-
-let player1Score = 15;
-let player2Score = 15;
 
 let player1ScoreDisplay = document.getElementById("player1-score")
 let player2ScoreDisplay = document.getElementById("player2-score")
@@ -102,24 +99,6 @@ let footballerImg = document.getElementById('footballer')
         document.getElementById("saves").innerText = player1Current.saves;
     }
 
-    
-
-    function blankPlayer2Card(){
-        document.getElementById("name2").innerText = "?????";
-        document.getElementById("appearences2").innerText = "?????";
-        document.getElementById("goals2").innerText = "?????";
-        document.getElementById("wins2").innerText = "?????";
-        document.getElementById("loses2").innerText = "?????";
-        document.getElementById("assists2").innerText = "?????";
-        document.getElementById("tackles2").innerText = "?????";
-        document.getElementById("fouls2").innerText = "?????";
-        document.getElementById("saves2").innerText = "?????";
-    }
-
-    blankPlayer2Card()
-
-
-
 let player2FootballerImg = document.getElementById('footballer2')
 
     function drawPlayer2Card(){
@@ -137,7 +116,7 @@ let player2FootballerImg = document.getElementById('footballer2')
     }
 
 
-    function revealPlayer2Card(){
+function revealPlayer2Card(){
         player2FootballerImg.src = `${player2Current.img}`
         document.getElementById("footballer2").src = player2Current.img;
         document.getElementById("name2").innerText = player2Current.name;
@@ -353,22 +332,18 @@ function savesStatComp(){
 
 function updateResult(result){
     if(result=="player1-win"){
-        // player1Score +=1
         player1Hand.push(player1Current)
         player1Hand.push(player2Current)
         console.log(player1Current)
-        player1NewCardTotal = player1Hand.length
-        console.log(player1NewCardTotal)
-        player1ScoreDisplay.textContent = `You have ${player1NewCardTotal} Cards`;
+        player1ScoreDisplay.textContent = `You have ${player1Hand.length} Cards`;
+        player2ScoreDisplay.textContent = `The Computer has ${player2Hand.length} Cards`;
         messageDisplay.textContent = `Player 1 wins the round!`;
         playGame();
     }else if(result=="player2-win"){
-        // player2Score +=1
         player2Hand.push(player1Current)
         player2Hand.push(player2Current)  
-        player2NewCardTotal = player2Hand.length
-        console.log(player2NewCardTotal)
-        player2ScoreDisplay.textContent = `The Computer has ${player2NewCardTotal} Cards`;
+        player2ScoreDisplay.textContent = `The Computer has ${player2Hand.length} Cards`;
+        player1ScoreDisplay.textContent = `The Computer has ${player1Hand.length} Cards`;
         messageDisplay.textContent = `The Computer wins the round!`;
         playGame();  
     }else{
@@ -385,13 +360,14 @@ const start = document.getElementById('start');
 
 // this works but is not really the game
 function playGame() {
-    if (player1Score < 30 && player2Score < 30){
-        //play game
-        // startGame()
-    } else if (player2Score == 30){
+    // if (player1Hand.length < 30 && player2Hand.length < 30){
+    //     //play game
+    //     // startGame()
+    // } else 
+    if (player2Hand.length == 30){
         messageDisplay.textContent = "You Suck, you were beaten by a computer!!!"
         start.style.visibility = 'hidden';//hides the next button to stop play
-    } else if (player1Score == 30){
+    } else if (player1Hand.length == 30){
         //win message
         messageDisplay.textContent = "The game has finished! Player 1 is the Victor!!!"
         start.style.visibility = 'hidden';//hides the next button to stop play
